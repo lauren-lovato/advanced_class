@@ -29,13 +29,13 @@
   
   // load GeoJSON from an external file
   $.getJSON("sf_crime.geojson",function(data){
-    var ratIcon = L.icon({
+    var crimeIcon = L.icon({
       iconUrl: 'https://image.flaticon.com/icons/png/512/190/190640.png',
       iconSize: [45,45]
     }); 
     L.geoJson(data,{
       pointToLayer: function(feature,latlng){
-	    var marker = L.marker(latlng,{icon: ratIcon});
+	    var marker = L.marker(latlng,{icon: crimeIcon});
         marker.bindPopup(feature.properties.date + '<br/>' + '<b>' + feature.properties.title + '</b>' + ': ' + feature.properties.description);
         return marker;
       }
