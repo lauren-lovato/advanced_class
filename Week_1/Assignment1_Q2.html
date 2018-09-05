@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>A Leaflet map!</title>
+  <title>San Francisco Crime (points)</title>
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
    crossorigin=""/>
@@ -29,13 +29,13 @@
   
   // load GeoJSON from an external file
   $.getJSON("sf_crime.geojson",function(data){
-    var ratIcon = L.icon({
-      iconUrl: 'http://andywoodruff.com/maptime-leaflet/rat.png',
+    var crimeIcon = L.icon({
+      iconUrl: 'https://maptimeboston.github.io/leaflet-intro/rat.png',
       iconSize: [60,50]
     }); 
     L.geoJson(data  ,{
       pointToLayer: function(feature,latlng){
-	    var marker = L.marker(latlng,{icon: ratIcon});
+	    var marker = L.marker(latlng,{icon: crimeIcon});
         marker.bindPopup(feature.properties.Location + '<br/>' + feature.properties.OPEN_DT);
         return marker;
       }
