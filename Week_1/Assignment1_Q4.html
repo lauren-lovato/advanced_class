@@ -1,0 +1,51 @@
+<html>
+<head>
+  <title>San Francisco Crime - Heat Map</title>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+   crossorigin=""/>
+ <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+   integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+   crossorigin=""></script>
+  <script src="https://cdn.rawgit.com/jquery/jquery-ui/74f8a0ac/external/jquery-2.1.1/jquery.js"></script> 
+  <script src="leaflet.markercluster.js"></script>
+  <style>
+    #map{ height: 100% }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <script>
+  // initialize the map
+  var map = L.map('map').setView([37.7749,-122.4194], 12);
+  
+  // load a tile layer
+  L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png',
+    {
+      attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
+      maxZoom: 17,
+      minZoom: 9
+    }).addTo(map);
+  
+    $.getJSON("sf_crime.geojson",function(data){
+    var robberIcon = L.icon({
+      iconUrl: 'http://andywoodruff.com/maptime-leaflet/rat.png',
+      iconSize: [60,50]
+    });
+    var crimes = L.geoJson(data,{
+      pointToLayer: function(feature,latlng){
+        var marker = L.marker(latlng,{icon: robberIcon});
+        marker.bindPopup(feature.properties.Location + '<br/>' + feature.properties.OPEN_DT);
+        return marker;
+      }
+    });
+    var clusters = L.markerClusterGroup();
+    clusters.addLayer(crimes);
+    map.addLayer(clusters);
+  });
+       
+  </script>
+</body>
+</html>
