@@ -30,11 +30,11 @@
     }).addTo(map);
   
     $.getJSON("sf_crime.geojson",function(data){
-     var robberIcon = L.icon({
+      var robberIcon = L.icon({
       iconUrl: 'https://image.flaticon.com/icons/png/512/190/190640.png',
       iconSize: [45,45]
     }); 
-    var crimes = L.geoJson(data,{
+    var sf_crime = L.geoJson(data,{
       pointToLayer: function(feature,latlng){
 	var marker = L.marker(latlng,{icon: robberIcon});
         marker.bindPopup(feature.properties.date + '<br/>' + '<b>' + feature.properties.title + '</b>' + ': ' + feature.properties.description);
@@ -42,7 +42,7 @@
       }
     });
     var clusters = L.markerClusterGroup();
-    clusters.addLayer(crimes);
+    clusters.addLayer(sf_crime);
     map.addLayer(clusters);
   });
         
