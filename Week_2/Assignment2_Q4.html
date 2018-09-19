@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Normalized Difference Vegetation Index (NDVI) of Midwest from Landsat 8 Imagery</title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.8/"></script>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <script>
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/ImageryLayer",
+        "esri/layers/support/RasterFunction",
+        "dojo/domReady!"
+      ],
+      function(
+        Map, MapView, ImageryLayer,
+        RasterFunction
+      ) {
+        /***************************************
+         * Set up popup template of image layer
+         **************************************/
+
+        var imagePopupTemplate = { // autocasts as new PopupTemplate()
+          title: "Data from Landsat 8 OLI satellite",
+          content: "Normalized Difference Vegetation Index (NDVI): <b>{Raster.ServicePixelValue} </b>" +
+            "<br>Raw Digital Number (DN) values (Ultra Blue, B, G, R, NIR, SWIR 1, SWIR 2, Panchromatic, Cirrus): <b>{Raster.ItemPixelValue} </b>"
+        };
+
+        /*******************************************************************
+         * Create image layer with server defined raster function templates
+         ******************************************************************/
+
+        var serviceRFT = new RasterFunction({
+          functionName: "NDVI Colorized",
+          variableName: "Raster"
+        });
+
+        var layer = new ImageryLayer({
+          url: "https://landsat2.arcgis.com/arcgis/rest/services/Landsat8_Views/ImageServer",
+          renderingRule: serviceRFT,
+          popupTemplate: imagePopupTemplate
+        });
+
+        /*************************
+         * Add image layer to map
+         ************************/
+
+        var map = new Map({
+          basemap: "hybrid",
+          layers: [layer]
+        });
+
+        var view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [-90.35, 42],
+          zoom: 5.5,
+          popup: {
+            actions: []
+          },
+        });
+      }
+    );
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>
