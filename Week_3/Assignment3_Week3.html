@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-  <title>Intro to SceneView - Create a 3D map - 4.8</title>
+  <title>3D Map of St. Louis</title>
   <style>
     html,
     body,
@@ -26,18 +26,14 @@
       "esri/widgets/Home",
       "dojo/domReady!"
     ], function(WebScene, SceneView, Camera, Home) {
-
     
-      /*var map = new Map({
-        basemap: "streets",
-        ground: "world-elevation"
-      });*/
       var scene = new WebScene({
         portalItem:{
          id:"cdf7b9d41f1440068543cce2bb62ce7a" 
         }
       });
            
+      //Home - St. Louis
       var camera = new Camera({
         position: [
           -90.1994, // lon
@@ -47,17 +43,19 @@
         tilt:0,
         heading: 0
       });
-           
+      
+      // Gateway Arch
       var camera1 = new Camera({
 	     position: [
           -90.186557,
           38.6245165,
           1000
         ],
-        tilt: 0,
-        heading: 270
+        tilt: 50,
+        heading: 290
 	});
-		
+	  
+      // Forest Park
       var camera2 = new Camera({
          position: [
           -90.2898154,
@@ -68,6 +66,7 @@
         heading: 0
 	});
       
+       // MO Botanical Garden
        var camera3 = new Camera({
          position: [
           -90.2630335,
@@ -77,16 +76,17 @@
         tilt: 0,
         heading: 0
 	});
-	
-      var view = new SceneView({
+                 
+	   var view = new SceneView({
         container: "viewDiv",
         map: scene,
-        camera: camera
+        camera: camera,
+        viewingMode: "global"
     });
     
-    [v1, v2, v3].forEach(function(button) {
+    [v1, v2, v3, v4].forEach(function(button) {
       button.style.display = 'flex';
-      view.ui.add(button, 'bottom-left');
+      view.ui.add(button, "top-right");
     });
 	
       var homeBtn = new Home({
@@ -96,23 +96,33 @@
     view.ui.add(homeBtn, "top-left");
       
       v1.addEventListener('click', function() {
-      // reuse the default camera position already established in the homeBtn
       view.goTo({
         target:camera1
       });
     });
       
       v2.addEventListener('click', function() {
-      // reuse the default camera position already established in the homeBtn
       view.goTo({
 		target:camera2
       });
     });
    
       v3.addEventListener('click', function() {
-      // reuse the default camera position already established in the homeBtn
       view.goTo({
         target:camera3
+      });
+    });
+      
+      v4.addEventListener('click', function() {
+      view.goTo({
+         // reuse the default camera position already established in the homeBtn
+        position: [
+          -90.1994,
+          38.6270, 
+          3000
+        ],
+        tilt: 20,
+        heading: 100
       });
     });
    });
@@ -124,5 +134,6 @@
   <button id="v1" class="off">Gateway Arch</button>
   <button id="v2" class="off">Forest Park</button>
   <button id="v3" class="off">MO Botanical Garden</button>
+  <button id="v4" class="off">Downtown</button>
 </body>
 </html>
