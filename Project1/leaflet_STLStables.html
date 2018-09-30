@@ -23,15 +23,14 @@
   L.tileLayer('http://a.tile.stamen.com/terrain/{z}/{x}/{y}.png',
     ).addTo(map);
   // load GeoJSON from an external file
-  $.getJSON("STLCounty_municipalities.geojson",function(STL){
-    // add GeoJSON layer to the map once the file is loaded
-    L.geoJson(STL).addTo(map);
+  
+  $.getJSON("StLouisarea_Stables.geojson",function(stable){
+    L.geoJson(stable).addTo(map);
     
-  $.getJSON("StLouisarea_Stables.geojson",function(stables){
-   // add GeoJSON layer to the map once the file is loaded
-   L.geoJson(stables).addTo(map);  
-   
-  });
+  $.getJSON("STLCounty_municipalities.geojson",function(STL){
+    L.geoJson(STL).addTo(map);  
+ 
+ });
  
   </script>
 </body>
