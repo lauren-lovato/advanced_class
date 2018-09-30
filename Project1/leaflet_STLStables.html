@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>A Leaflet map!</title>
+  <title>Leaflet Map of St. Louis Area Riding Stables</title>
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
    crossorigin=""/>
@@ -23,9 +23,14 @@
   L.tileLayer('http://a.tile.stamen.com/terrain/{z}/{x}/{y}.png',
     ).addTo(map);
   // load GeoJSON from an external file
-  $.getJSON("STLCounty_municipalities.geojson",function(data){
+  $.getJSON("STLCounty_municipalities.geojson",function(STL){
     // add GeoJSON layer to the map once the file is loaded
-    L.geoJson(data).addTo(map);
+    L.geoJson(STL).addTo(map);
+    
+   $.getJSON("StLouisarea_Stables.geojson",function(stables){
+   // add GeoJSON layer to the map once the file is loaded
+   L.geoJson(stables).addTo(map);  
+   
   });
  
   </script>
