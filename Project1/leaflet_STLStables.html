@@ -24,6 +24,10 @@
     ).addTo(map);
   // load GeoJSON from an external file
   
+  $.getJSON("STLCounty_municipalities.geojson",function(STL){
+    L.geoJson(STL).addTo(map);
+  });
+    
   $.getJSON("StLouisarea_Stables.geojson",function(data){
     var horseIcon = L.icon({
       iconUrl: 'horse.png',
@@ -36,10 +40,7 @@
         return marker;
       }
     }).addTo(map);
-    
-  $.getJSON("STLCounty_municipalities.geojson",function(STL){
-    L.geoJson(STL).addTo(map);
-    });
+  });
   
   </script>
 </body>
