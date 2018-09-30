@@ -26,9 +26,11 @@
   
   $.getJSON("StLouisarea_Stables.geojson",function(stable){
     L.geoJson(stable).addTo(map);
+    });
     
   $.getJSON("STLCounty_municipalities.geojson",function(STL){
-    L.geoJson(STL).addTo(map);  
+    L.geoJson(STL).addTo(map);
+    });
  
  });
  
