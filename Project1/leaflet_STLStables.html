@@ -18,15 +18,24 @@
 
   <script>
   // initialize the map
-  var map = L.map('map').setView([38.6, -90.25], 10);
+  var map = L.map('map').setView([38.6, -90.25], 9.5);
   // load a tile layer
   L.tileLayer('http://a.tile.stamen.com/terrain/{z}/{x}/{y}.png',
     ).addTo(map);
   // load GeoJSON from an external file
   
-  $.getJSON("StLouisarea_Stables.geojson",function(stable){
-    L.geoJson(stable).addTo(map);
+  $.getJSON("StLouisarea_Stables.geojson",function(data){
+    var horseIcon = L.icon({
+      iconUrl: 'horse.png',
+      iconSize: [60,50]
     });
+    L.geoJson(data,{
+      pointToLayer: function(feature,latlng){
+        var marker = L.marker(latlng,{icon: horseIcon});
+        marker.bindPopup(feature.properties.Name + '<br/>' + feature.properties.Address);
+        return marker;
+      }
+    }).addTo(map);
     
   $.getJSON("STLCounty_municipalities.geojson",function(STL){
     L.geoJson(STL).addTo(map);
