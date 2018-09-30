@@ -23,7 +23,7 @@
   L.tileLayer('http://a.tile.stamen.com/toner/{z}/{x}/{y}.png',
     ).addTo(map);
   // load GeoJSON from an external file
-  $.getJSON("STL_MunicipalBoundaries1.geojson",function(data){
+  $.getJSON("STLCounty_municipalities.geojson",function(data){
     // add GeoJSON layer to the map once the file is loaded
     L.geoJson(data).addTo(map);
   });
