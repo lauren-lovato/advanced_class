@@ -28,6 +28,10 @@
     L.geoJson(STL).addTo(map);
   });
     
+  $.getJSON("MO_counties.geojson",function(county){
+    L.geoJson(county).addTo(map);
+  }); 
+    
   $.getJSON("StLouisarea_Stables.geojson",function(data){
     var horseIcon = L.icon({
       iconUrl: 'horse.png',
