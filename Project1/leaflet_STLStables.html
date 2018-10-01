@@ -36,7 +36,7 @@
     L.geoJson(data,{
       pointToLayer: function(feature,latlng){
         var marker = L.marker(latlng,{icon: horseIcon});
-        marker.bindPopup('<b>'+ feature.properties.Name + '</b>' + '<br/>'+ "Discipline: " + feature.properties.Discipline + '<br/>'+ feature.properties.Address +'<br/>'+ '</a>'+ feature.properties.Website);
+        marker.bindPopup('<b>'+ feature.properties.Name + '</b>' + '<br/>'+ "Discipline: " + feature.properties.Discipline + '<br/>'+ feature.properties.Address +'<br/>'+ "<a href='"+ feature.properties.Website);
         return marker;
       }
     }).addTo(map);
