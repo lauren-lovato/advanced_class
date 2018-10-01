@@ -24,9 +24,9 @@
     ).addTo(map);
   // load GeoJSON from an external file
   
-  $.getJSON("STLCounty_municipalities.geojson",function(STL){
+  /*$.getJSON("STLCounty_municipalities.geojson",function(STL){
     L.geoJson(STL).addTo(map);
-  });
+  });*/ 
     
   $.getJSON("MO_counties.geojson",function(county){
     L.geoJson(county,{
