@@ -29,6 +29,10 @@
   });
     
   $.getJSON("MO_counties.geojson",function(county){
+      var label = new L.Label();
+      label.setContentlabel(feature.properties.COUNTYNAME);
+      label.setLatLng(polygon.getBounds().getCenter());
+      map.showLabel(label);
     L.geoJson(county).addTo(map);
   }); 
     
