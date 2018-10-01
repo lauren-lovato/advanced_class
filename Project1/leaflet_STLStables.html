@@ -29,12 +29,12 @@
   });
     
   $.getJSON("MO_counties.geojson",function(county){
-    L.geoJson(county).addTo(map);
-       polygon.bindTooltip(feature.properties.COUNTYNAME,
-       {permanent: true, direction:"center"}
-       ).openTooltip();
-  });
-    
+    L.geoJson(county,{
+      .bindTooltip(function (layer) {
+      return layer.feature.properties.COUNTYNAMES;
+    }, {permanent: true, opacity: 0.5}
+    ).addTo(map);
+        
   $.getJSON("StLouisarea_Stables.geojson",function(data){
     var horseIcon = L.icon({
       iconUrl: 'horse.png',
