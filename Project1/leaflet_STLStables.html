@@ -30,6 +30,11 @@
     
   $.getJSON("MO_counties.geojson",function(county){
     L.geoJson(county,{
+      onEachFeature: function(feature, layer) {
+       layer.bindLabel(feature.properties.COUNTYNAMES);
+    }
+});
+      
       .bindTooltip(function (layer) {
       return layer.feature.properties.COUNTYNAMES;
     }, {permanent: true, opacity: 0.5}
