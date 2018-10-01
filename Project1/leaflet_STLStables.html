@@ -33,13 +33,9 @@
       onEachFeature: function(feature, layer) {
        layer.bindLabel(feature.properties.COUNTYNAMES);
     }
-});
-      
-      .bindTooltip(function (layer) {
-      return layer.feature.properties.COUNTYNAMES;
-    }, {permanent: true, opacity: 0.5}
-    ).addTo(map);
-        
+   }).addTo(map);
+  });
+    
   $.getJSON("StLouisarea_Stables.geojson",function(data){
     var horseIcon = L.icon({
       iconUrl: 'horse.png',
