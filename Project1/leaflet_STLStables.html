@@ -31,7 +31,7 @@
   $.getJSON("STL_metro_counties.geojson",function(county){
     L.geoJson(county,{
       onEachFeature: function(feature, layer) {
-       return layer.bindTooltip(feature.properties.COUNTYNAME + " County");
+       return layer.bindTooltip(feature.properties.NAME + " County");
     }
    }).addTo(map);
   });
