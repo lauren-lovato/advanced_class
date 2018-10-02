@@ -28,7 +28,7 @@
     L.geoJson(STL).addTo(map);
   });*/ 
     
-  $.getJSON("MO_counties.geojson",function(county){
+  $.getJSON("STL_metro_counties.geojson",function(county){
     L.geoJson(county,{
       onEachFeature: function(feature, layer) {
        return layer.bindTooltip(feature.properties.COUNTYNAME + " County");
