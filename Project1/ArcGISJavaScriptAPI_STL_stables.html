@@ -26,7 +26,9 @@
       "esri/views/MapView",
       "esri/layers/FeatureLayer",
       "esri/widgets/Search",
-       "esri/widgets/Home",
+      "esri/widgets/Home",
+      "esri/widgets/Legend",
+      "esri/widgets/LayerList",
       "esri/config",
       "esri/core/urlUtils",
       "dojo/domReady!"
@@ -35,13 +37,15 @@
       MapView,
       FeatureLayer,
       Search,
-      Home, 
+      Home,
+      Legend,
+      LayerList,
       esriConfig,
       urlUtils
     ) {
       
       var map = new Map({
-        basemap: "hybrid",
+        basemap: "streets",
       });
       
       var view = new MapView({
@@ -135,6 +139,27 @@
         view: view
       });
       view.ui.add(homeBtn, "top-left");
+      
+       view.when(function() {
+	
+          // get the first layer in the collection of operational layers in the WebMap
+          // when the resources in the MapView have loaded.
+        var featureLayer = scene.layers.getItemAt(1);
+      
+        var layerList = new LayerList({
+          view: view
+         });
+      
+        var legend = new Legend({
+          view: view,
+          layerInfos: [{
+            layer: layer,
+            title: "Counties"
+          }]
+        });
+        view.ui.add(legend, "top-right");
+        view.ui.add(layerList, "bottom-right");
+        });
       
     });
   </script>
