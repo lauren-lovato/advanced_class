@@ -72,8 +72,22 @@
       
       var layer = new FeatureLayer({
         url: "https://services2.arcgis.com/bB9Y1bGKerz1PTl5/arcgis/rest/services/STL_metro_counties/FeatureServer",
-        labelingInfo: [labelClass]
-      });
+        labelingInfo: [labelClass],
+                      renderer: {
+                type: "simple", // autocasts as new SimpleRenderer()
+                symbol: {
+                  type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+                  color: "rgba(0,100,0,0.6)",
+                  size: 3,
+                  outline: {
+                    color: [0, 0, 0, 0.1],
+                    width: 0.5
+                  }
+                }
+              }
+            })
+          ]
+        }),
       map.add(layer);
           
       
