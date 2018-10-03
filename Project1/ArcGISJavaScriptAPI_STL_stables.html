@@ -26,6 +26,7 @@
       "esri/views/MapView",
       "esri/layers/FeatureLayer",
       "esri/widgets/Search",
+       "esri/widgets/Home",
       "esri/config",
       "esri/core/urlUtils",
       "dojo/domReady!"
@@ -34,6 +35,7 @@
       MapView,
       FeatureLayer,
       Search,
+      Home, 
       esriConfig,
       urlUtils
     ) {
@@ -128,6 +130,11 @@
       view.ui.add(searchWidget, {
         position: "top-right"
       });
+      
+      var homeBtn = new Home({
+        view: view
+      });
+      view.ui.add(homeBtn, "top-left");
       
     });
   </script>
