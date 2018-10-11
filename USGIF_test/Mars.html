@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Mars</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.8/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/SceneView",
+      "esri/layers/TileLayer",
+      "esri/layers/FeatureLayer",
+      "dojo/domReady!"
+    ], function(Map, SceneView, TileLayer, FeatureLayer) {
+
+  var map = new Map({
+        basemap: "imagery"
+      });
+      var view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        zoom: 5,
+        center: [-5, -2] // longitude, latitude
+      });
+      
+      
+      var featurelayer = new FeatureLayer({
+       url: "https://services2.arcgis.com/bB9Y1bGKerz1PTl5/ArcGIS/rest/services/Mars_features_points/FeatureServer"
+     });
+      map.add(featurelayer);
+      
+      var flayer = new TileLayer({
+        url: "https://tiles.arcgis.com/tiles/poOcx60xJtGtoR7g/arcgis/rest/services/Mars/MapServer"
+        });
+      map.add(flayer);
+      });
+     
+
+    
+      
+
+    
+    
+    
+    
+  
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
