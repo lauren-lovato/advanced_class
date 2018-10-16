@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Mars</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.8/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/SceneView",
+      "esri/layers/TileLayer",
+      "esri/layers/FeatureLayer",
+      "esri/widgets/Home",
+      "esri/Camera",
+      "dojo/domReady!"
+    ], function(Map, SceneView, TileLayer, FeatureLayer, Home, Camera) {
+  
+      
+      var map = new Map({
+        basemap: "imagery"
+      });
+      
+      var camera = new Camera({
+        position: [
+          19.75799, // lon
+          34.81608, // lat
+          20000000// elevation in meters
+        ],
+        tilt:0,
+        heading: 0
+      });
+      
+      
+      var view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        camera: camera,
+        viewingMode: "global"
+      });
+      
+   
+       var flayer = new TileLayer({
+        url: "https://tiles.arcgis.com/tiles/poOcx60xJtGtoR7g/arcgis/rest/services/Mars/MapServer"
+        });
+      map.add(flayer);    
+ 
+    
+     var template = { // autocasts as new PopupTemplate()
+        title: "{Feature_Name}",
+        content: [{
+          // It is also possible to set the fieldInfos outside of the content
+          // directly in the popupTemplate. If no fieldInfos is specifically set
+          // in the content, it defaults to whatever may be set within the popupTemplate.
+          type: "fields",
+          fieldInfos: [{
+            fieldName: "Description",
+            label: "Description: ",
+            visible: true
+          }, {
+            fieldName: "Image",
+            label: "Image: ",
+            visible: true,
+            format: {
+              digitSeparator: true,
+              places: 0
+            }
+          }, {
+            fieldName: "Website",
+            label: "Website: ",
+            visible: true,
+            format: {
+              digitSeparator: true,
+              places: 0
+            }
+          }]
+        }]
+      };
+      var renderer = {
+      type: "simple",  // autocasts as new SimpleRenderer()
+      symbol: {
+        type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+        size: 10,
+        color: "blue",
+        outline: {  // autocasts as new SimpleLineSymbol()
+          width: 0.5,
+          color: "white"
+        }
+      }
+    };
+      // Reference the popupTemplate instance in the
+      // popupTemplate property of FeatureLayer
+      var featureLayer = new FeatureLayer({
+        url: "https://services2.arcgis.com/bB9Y1bGKerz1PTl5/ArcGIS/rest/services/Mars_features_points/FeatureServer",
+        outFields: ["*"],
+        renderer: renderer,
+        popupTemplate: template
+      });
+      map.add(featureLayer);
+     
+      
+     var homeBtn = new Home({
+       view: view
+    });
+     view.ui.add(homeBtn, "top-left");
+    
+  
+    [v1, v2, v3, v4, v5, v6, v7, v8, v9].forEach(function(button) {
+      button.style.display = 'flex';
+      view.ui.add(button, 'top-right');
+    });
+	
+      //Victoria crater
+     var camera1 = new Camera({
+	        position: [
+          -5.498037247,
+          -2.05225838,
+          500000
+        ],
+        tilt: 0,
+        heading: 0
+	});
+    
+    //Endeavour crater
+    var camera2 = new Camera({
+	        position: [
+          -5.195496719,
+          -2.283643486,
+          500000
+        ],
+        tilt: 0,
+        heading: 0
+	});
+    
+     //Spirit of STL crater
+     var camera3 = new Camera({
+	        position: [
+          -5.353705862,
+          -2.317974132,
+          500000
+        ],
+        tilt: 0,
+        heading: 0
+	});
+	
+         //Namib Dune
+     var camera4 = new Camera({
+	        position: [
+          137.381695,
+          -4.700152887,
+          500000
+        ],
+        tilt: 0,
+        heading: 0
+	});
+	
+          //Mount Sharp
+     var camera5 = new Camera({
+	        position: [
+          137.8448374,
+          -5.08295775,
+          700000
+        ],
+        tilt: 0,
+        heading: 0
+	});
+      
+            //Osuga Valles
+     var camera6 = new Camera({
+	        position: [
+          -38.59086754,
+          -15.30753075,
+          900000
+        ],
+        tilt: 0,
+        heading: 0
+	});
+		
+	       //Phlegra Montes
+     var camera7 = new Camera({
+	        position: [
+          163.7142297,
+          40.39667309,
+          800000
+        ],
+        tilt: 0,
+        heading: 0
+	});
+      
+           //Acheron Fossae
+     var camera8 = new Camera({
+	        position: [
+          -135.023798,
+          38.27416563,
+          1000000
+        ],
+        tilt: 0,
+        heading: 0
+	});
+		
+	     //Noctis Labyrinthus
+     var camera9 = new Camera({
+	        position: [
+          -101.1888667,
+          -6.362483392,
+          900000
+        ],
+        tilt: 0,
+        heading: 0
+	});
+		 
+     
+    v2.addEventListener('click', function() {
+      view.goTo({
+		target:camera2
+      });
+    });
+    
+    v1.addEventListener('click', function() {
+      view.goTo({
+        target:camera1
+      });
+    });
+      
+     v3.addEventListener('click', function() {
+      view.goTo({
+        target:camera3
+      });
+    }); 
+      
+     v4.addEventListener('click', function() {
+      view.goTo({
+        target:camera4
+      });
+    });
+     
+     v5.addEventListener('click', function() {
+      view.goTo({
+        target:camera5
+      });
+    });
+      
+     v6.addEventListener('click', function() {
+      view.goTo({
+        target:camera6
+      });
+    });  
+     
+     v7.addEventListener('click', function() {
+      view.goTo({
+        target:camera7
+      });
+    });
+     
+    v8.addEventListener('click', function() {
+      view.goTo({
+        target:camera8
+      });
+    });  
+    
+    v9.addEventListener('click', function() {
+     view.goTo({
+        target:camera9
+      });
+    });
+      
+    });
+      
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+  <button id="v1" class="off">Victoria Crater</button>
+  <button id="v2" class="off">Endeavour Crater</button>
+  <button id="v3" class="off">Spirit of St. Louis Crater</button>
+  <button id="v4" class="off">Namib Dune</button>
+  <button id="v5" class="off">Mount Sharp</button>
+  <button id="v6" class="off">Osuga Valles</button>
+  <button id="v7" class="off">Phlegra Montes</button>
+  <button id="v8" class="off">Acheron Fossae</button>
+  <button id="v9" class="off">Noctis Labyrinthus</button>
+</body>
+</html>
