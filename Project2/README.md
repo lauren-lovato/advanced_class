@@ -8,4 +8,8 @@ The Fragile States Index is an open source dataset that ranks the fragility of t
 
 If you want an A+, please complete of of the following additoinal tasks. Either:  
   * Create a Storymap from your FSI Webmaps where your storymap has a new page for each year (this can be done manually, i.e. without Python).
-  * Or, for each country, run the Mann-Kendall Test (mk_test.py) adn assess whether the FSI trend is improving, degrading, or unchanging over time.
+  * Or, for each country, run the Mann-Kendall Test (mk_test.py) adn assess whether the FSI trend is improving, degrading, or unchanging over time.  
+
+Web Map: http://slustl.maps.arcgis.com/home/item.html?id=8a850244b78e4d9fa3b9608e9de94dbd  
+Web Map for Story Map (changed colors): http://slustl.maps.arcgis.com/home/item.html?id=58c812476cb9412f897223cc67fdf324  
+Story Map: https://slustl.maps.arcgis.com/apps/MapJournal/index.html?appid=1e363e0b5ce541de868938c59c0febad  
