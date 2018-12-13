@@ -13,6 +13,17 @@
       height: 100%;
       width: 100%;
     }
+    #instruction {
+      z-index: 99;
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      margin-left: -175px;
+      height: 20px;
+      width: 450px;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif
+    }
   </style>
 
   <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
@@ -87,7 +98,16 @@
               places: 0
             }
           }]
+        },{
+          type: "media",
+          mediaInfos:[{
+            title: "Anaglyph",
+            type: "image",
+            value: {
+              sourceURL:"{Image}",
+           }
         }]
+       }]
       };
       var renderer = {
       type: "simple",  // autocasts as new SimpleRenderer()
@@ -284,6 +304,7 @@
 
 <body>
   <div id="viewDiv"></div>
+  <div id="instruction">Click on the boxes to the right to zoom to interesting locations on Mars. Put on red-blue 3D glasses to view the anaglyph!</div>
   <button id="v1" class="off">Victoria Crater</button>
   <button id="v2" class="off">Endeavour Crater</button>
   <button id="v3" class="off">Spirit of St. Louis Crater</button>
